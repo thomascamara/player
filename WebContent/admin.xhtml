@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition template="template.xhtml">
+
+	<script src="js/jquery-2.0.3.js"></script>
+	<ui:define name="conteudo">
+		<h:form id="form">
+			<p:panel header="Cadastro de Musica">
+				<p:panelGrid columns="2">
+				
+					<p:outputLabel value="Artist: "/>
+					<p:inputText value="#{adminMB.midia.nmArtista}" required="true" requiredMessage="Artista Obrigatorio" />
+					
+					<p:outputLabel value="Title: " />
+					<p:inputText value="#{adminMB.midia.nmMusica}" required="true" requiredMessage="Title Obrigatório" />
+					
+					<p:outputLabel value="URL: "/>
+					<p:inputText value="#{adminMB.midia.dsUrl}" required="true" requiredMessage="URL Obrigatorio" />
+					
+					<p:outputLabel value="Gênero: "/>
+					<p:selectOneMenu value="#{adminMB.midia.genero.cdGenero}" required="true" requiredMessage="Genero Obrigatorio" >
+						<f:selectItem itemLabel="Select One" itemValue="" />
+						<f:selectItems value="#{adminMB.generos}" var="genero" itemValue="#{genero.cdGenero}"
+						itemLabel="#{genero.nmGenero}" />
+					</p:selectOneMenu>					
+					
+				</p:panelGrid>
+				
+				<p:growl id="growlMsgLoad" showDetail="true"/>
+				<p:commandButton action="#{adminMB.save}" value="Salvar" update="growlMsgLoad" />
+			</p:panel>
+		</h:form>
+
+	</ui:define>
+</ui:composition>
+</html>

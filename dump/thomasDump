@@ -1,0 +1,340 @@
+--
+-- PostgreSQL database dump
+--
+
+SET statement_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+--
+-- Name: postgres; Type: COMMENT; Schema: -; Owner: postgres
+--
+
+COMMENT ON DATABASE postgres IS 'default administrative connection database';
+
+
+--
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+SET search_path = public, pg_catalog;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- Name: artista; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE artista (
+    cd_artista integer NOT NULL,
+    nm_artista character varying(50)
+);
+
+
+ALTER TABLE public.artista OWNER TO postgres;
+
+--
+-- Name: genero; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE genero (
+    cd_genero integer NOT NULL,
+    nm_genero character varying(50)
+);
+
+
+ALTER TABLE public.genero OWNER TO postgres;
+
+--
+-- Name: hibernate_sequence; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE hibernate_sequence
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.hibernate_sequence OWNER TO postgres;
+
+--
+-- Name: midia; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE midia (
+    cd_midia bigint NOT NULL,
+    ds_url character varying(255),
+    nm_musica character varying(255),
+    tp_midia integer,
+    cd_genero integer,
+    nm_artista character varying(50)
+);
+
+
+ALTER TABLE public.midia OWNER TO postgres;
+
+--
+-- Name: seqmidia; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE seqmidia
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.seqmidia OWNER TO postgres;
+
+--
+-- Data for Name: artista; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY artista (cd_artista, nm_artista) FROM stdin;
+1	Charlie Brown Jr
+2	Coldplay
+3	Avicii
+4	David Guetta
+5	Dj Antonie
+6	Niki & The Dove
+7	Igor Rigon
+8	Otto Knows
+9	Lana Del Rey
+10	Florence + The Machine
+11	Atlas Genius
+12	Joseph Arthur
+13	Wild Nothing
+14	Kodaline
+15	Mumm Ra
+16	M83
+17	Brad Sucks
+18	The Temper Trap
+19	Blink 182
+20	Dionne Bromfield
+21	Rox
+22	Plain White Ts
+23	Red Hot Chili Peppers
+24	Skank
+25	Stereophonics
+26	Sublime
+27	Sweet House Mafia
+28	The Killers
+29	MGMT
+30	Asaf Avidan & The Mojos
+31	Angus & Julia Stone
+32	Deep Dish
+33	Noir & Haze
+34	Martin Solveig ft. Dragonette
+35	Ian Carey
+36	Marcin Czubala
+\.
+
+
+--
+-- Data for Name: genero; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY genero (cd_genero, nm_genero) FROM stdin;
+3	Rock Nacional
+1	Deep House
+4	Indie Rock
+2	Alternative
+5	Punk Rock
+6	Pop
+\.
+
+
+--
+-- Name: hibernate_sequence; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('hibernate_sequence', 1, false);
+
+
+--
+-- Data for Name: midia; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY midia (cd_midia, ds_url, nm_musica, tp_midia, cd_genero, nm_artista) FROM stdin;
+81	http://dl.soundowl.com/5wxt.mp3	Welcome Home	1	4	Radical Face
+83	http://dl.soundowl.com/5wzn.mp3	Talking To The Moon	1	6	Bruno Mars
+85	http://dl.soundowl.com/5wzr.mp3	Count On Me	1	6	Bruno Mars
+87	http://dl.soundowl.com/5wzw.mp3	It Will Rain	1	6	Bruno Mars
+89	http://dl.soundowl.com/5x0p.mp3	Meu Novo Mundo	1	3	Charlie Brown Jr
+91	http://dl.soundowl.com/5x10.mp3	Munich	1	4	The Editors
+93	http://dl.soundowl.com/5x1q.mp3	Helena Beat	1	4	Foster The People
+95	http://dl.soundowl.com/5x1t.mp3	Pumped Up Kicks	1	4	Foster The People
+97	http://dl.soundowl.com/5x1v.mp3	Fluorescent Adolescent	1	4	Arctic Monkeys
+98	http://dl.soundowl.com/5x1w.mp3	Do I Wanna Know?	1	4	Arctic Monkeys
+99	http://dl.soundowl.com/5x1x.mp3	Bullet and a Target (Acoustic)	1	2	Citizen Cope
+100	http://dl.soundowl.com/5x2k.mp3	Yellow	1	2	Coldplay
+101	http://dl.soundowl.com/5x2q.mp3	Paradise	1	2	Coldplay
+102	http://dl.soundowl.com/5x2u.mp3	The Scientist	1	2	Coldplay
+66	http://a.tumblr.com/sXG0jZqOGe6ykzswAzMpA6JJo1.mp3	Human	1	4	The Killers
+103	http://dl.soundowl.com/5xy6.mp3	Outta Nowhere	1	6	Pitbull Ft Danny Mercer
+104	http://dl.soundowl.com/5xy7.mp3	And We Dances	1	6	Macklemore
+105	http://dl.soundowl.com/5xy9.mp3	Vandaag	1	1	Bakermat
+106	http://dl.soundowl.com/5xyb.mp3	Cant Believe It	1	6	Pitbull Ft Flo Rida
+107	http://dl.soundowl.com/5xye.mp3	Paperweight	1	2	Joshua Radin & Schuyler Fisk
+108	http://dl.soundowl.com/5xyf.mp3	Sonnentanz	1	1	Klangkarussell feat. Will Heard
+109	http://dl.soundowl.com/5xyg.mp3	Royals	1	6	Lorde
+110	http://dl.soundowl.com/5xyh.mp3	Look Right Through (ft. Damon C. Scott)	1	1	Storm Queen
+111	http://dl.soundowl.com/5xyi.mp3	Afraid	1	2	The Neighbourhood
+112	http://dl.soundowl.com/5xyd.mp3	Bonfire Heart	1	2	James Blunt
+113	http://dl.soundowl.com/5xyj.mp3	Counting Stars	1	6	One Republic
+114	http://dl.soundowl.com/5xyk.mp3	Same Love	1	6	Macklemore
+115	http://dl.soundowl.com/5xyl.mp3	Thinking About You (feat. Ayah Marar)	1	1	Calvin Harris
+116	http://dl.soundowl.com/5xym.mp3	Diamonds And Guns	1	6	The Transplants
+117	http://dl.soundowl.com/5xyn.mp3	Wheels	1	2	Fink
+3	http://dl.soundowl.com/5ro3.mp3	Tudo Que Ela Gosta de Escutar	1	3	Charlie Brown Jr
+2	http://dl.soundowl.com/5ro5.mp3	So Por Uma Noite	1	3	Charlie Brown Jr
+1	http://dl.soundowl.com/5ro6.mp3	Oba La vem Ela	1	3	Charlie Brown Jr
+65	http://dl.soundowl.com/5vk1.mp3	Talk	1	2	Coldplay
+5	http://dl.soundowl.com/5ro1.mp3	Viva La Vida	1	2	Coldplay
+4	http://dl.soundowl.com/5rnx.mp3	Fix You	1	2	Coldplay
+80	http://dl.soundowl.com/5vme.mp3	I Could Be The One	1	1	Avicii
+6	http://dl.soundowl.com/5vjc.mp3	Wake Me Up	1	1	Avicii
+9	http://dl.soundowl.com/5rvw.mp3	Levels	1	1	Avicii
+68	http://dl.soundowl.com/5vma.mp3	Louder Than Words	1	1	David Guetta
+10	http://dl.soundowl.com/5rvx.mp3	Play Hard	1	1	David Guetta
+12	http://dl.soundowl.com/5rw2.mp3	Without You	1	1	David Guetta
+11	http://dl.soundowl.com/5rvt.mp3	Memories	1	1	David Guetta
+8	http://dl.soundowl.com/5rvz.mp3	Titanium	1	1	David Guetta
+7	http://dl.soundowl.com/5rw1.mp3	Welcome to St Tropez	1	1	Dj Antonie
+13	http://dl.soundowl.com/5s0l.mp3	Mother Protect	1	1	Niki & The Dove
+15	https://api.soundcloud.com/tracks/35551953/download?client_id=b45b1aa10f1ac2941910a7f0d10f8e28	Session 20	1	1	Igor Rigon
+14	https://api.soundcloud.com/tracks/53221767/download?client_id=b45b1aa10f1ac2941910a7f0d10f8e28	Session 21	1	1	Igor Rigon
+16	http://dl.soundowl.com/5v01.mp3	Milion Voices	1	1	Otto Knows
+79	http://dl.soundowl.com/5vmd.mp3	Summertime Sadness (Remix)	1	1	Lana Del Rey
+18	http://dl.soundowl.com/5v0m.mp3	Young And Beautiful	1	2	Lana Del Rey
+23	http://dl.soundowl.com/5v0g.mp3	Blue Jeans	1	2	Lana Del Rey
+22	http://dl.soundowl.com/5v0d.mp3	Video Games	1	2	Lana Del Rey
+21	http://dl.soundowl.com/5v0b.mp3	Ride	1	2	Lana Del Rey
+20	http://dl.soundowl.com/5v09.mp3	Born To Die	1	2	Lana Del Rey
+19	http://dl.soundowl.com/5v02.mp3	Over The Love	1	2	Florence + The Machine
+24	http://dl.soundowl.com/5v9c.mp3	If So	1	4	Atlas Genius
+25	http://dl.soundowl.com/5v9a.mp3	Trojans	1	4	Atlas Genius
+26	http://dl.soundowl.com/5v9d.mp3	In The Sun	1	2	Joseph Arthur
+27	http://dl.soundowl.com/5v9g.mp3	Paradise	1	4	Wild Nothing
+28	http://dl.soundowl.com/5v9h.mp3	Love Like This	1	4	Kodaline
+29	http://dl.soundowl.com/5v9j.mp3	She s Got You High	1	4	Mumm Ra
+30	http://dl.soundowl.com/5v9p.mp3	Midnight City	1	2	M83
+31	http://dl.soundowl.com/5v9q.mp3	Making Me Nervous	1	2	Brad Sucks
+32	http://dl.soundowl.com/5v9r.mp3	Sweet Disposition	1	2	The Temper Trap
+38	http://dl.soundowl.com/5v9y.mp3	I Miss You	1	5	Blink 182
+37	http://dl.soundowl.com/5v9x.mp3	Up All Night	1	5	Blink 182
+36	http://dl.soundowl.com/5v9w.mp3	Stay Together For The Kids	1	5	Blink 182
+35	http://dl.soundowl.com/5v9v.mp3	First Date	1	5	Blink 182
+34	http://dl.soundowl.com/5v9t.mp3	Whats My Age Again	1	5	Blink 182
+33	http://dl.soundowl.com/5v9s.mp3	All The Small Things	1	5	Blink 182
+39	http://dl.soundowl.com/5vh6.mp3	He is So Fine	1	2	Dionne Bromfield
+40	http://dl.soundowl.com/5vh7.mp3	I Dont Believe	1	2	Rox
+44	http://dl.soundowl.com/5vji.mp3	1,2,3,4	1	2	Plain White Ts
+43	http://dl.soundowl.com/5vjh.mp3	Song	1	2	Plain White Ts
+42	http://dl.soundowl.com/5vjg.mp3	Hey There Delilah	1	2	Plain White Ts
+48	http://dl.soundowl.com/5vjm.mp3	Under The Bridge	1	2	Red Hot Chili Peppers
+47	http://dl.soundowl.com/5vjl.mp3	Even You, Brutus	1	2	Red Hot Chili Peppers
+46	http://dl.soundowl.com/5vjk.mp3	I Could Die For You	1	2	Red Hot Chili Peppers
+45	http://dl.soundowl.com/5vjj.mp3	Someone	1	2	Red Hot Chili Peppers
+55	http://dl.soundowl.com/5vju.mp3	Tanto (Ao Vivo Mineirão)	1	3	Skank
+54	http://dl.soundowl.com/5vjs.mp3	Fotos na Estante	1	3	Skank
+53	http://dl.soundowl.com/5vjr.mp3	Ali (Ao Vivo Mineirão)	1	3	Skank
+52	http://dl.soundowl.com/5vjq.mp3	Três Lados	1	3	Skank
+51	http://dl.soundowl.com/5vjp.mp3	Resposta	1	3	Skank
+50	http://dl.soundowl.com/5vjo.mp3	Balada do Amor Inabalavel	1	3	Skank
+49	http://dl.soundowl.com/5vjn.mp3	Tão Seu	1	3	Skank
+56	http://dl.soundowl.com/5vjv.mp3	Dakota	1	2	Stereophonics
+61	http://dl.soundowl.com/5vjz.mp3	Garden Grove	1	5	Sublime
+62	http://dl.soundowl.com/5vjw.mp3	Santeria	1	5	Sublime
+60	http://dl.soundowl.com/5vjy.mp3	Wrong Way	1	5	Sublime
+64	http://dl.soundowl.com/5vk0.mp3	Save The World	1	1	Sweet House Mafia
+67	http://dl.soundowl.com/5vm0.mp3	Read My Mind	1	4	The Killers
+78	http://dl.soundowl.com/5vm2.mp3	Kids	1	2	MGMT
+69	http://dl.soundowl.com/5vm3.mp3	One Day	1	1	Asaf Avidan & The Mojos
+71	http://dl.soundowl.com/5vm4.mp3	Big Jet Plane	1	1	Angus & Julia Stone
+72	http://dl.soundowl.com/5vm5.mp3	Dreams	1	1	Deep Dish
+74	http://dl.soundowl.com/5vm6.mp3	Around	1	1	Noir & Haze
+76	http://dl.soundowl.com/5vm7.mp3	Hello	1	1	Martin Solveig ft. Dragonette
+75	http://dl.soundowl.com/5vm8.mp3	Get Shaky	1	1	Ian Carey
+77	http://dl.soundowl.com/5vmb.mp3	Stay Close	1	1	Marcin Czubala
+82	http://dl.soundowl.com/5wzl.mp3	Blurred Lines	1	6	Robin Thicke ft TI and Pharrell
+84	http://dl.soundowl.com/5wzo.mp3	Marry You	1	6	Bruno Mars
+86	http://dl.soundowl.com/5wzt.mp3	Just The Way You Are	1	6	Bruno Mars
+88	http://dl.soundowl.com/5x0d.mp3	When I Was Your Man	1	6	Bruno Mars
+90	http://dl.soundowl.com/5x0u.mp3	Get Lucky	1	6	Daft Punk
+92	http://dl.soundowl.com/5x1a.mp3	I Follow Rivers	1	1	Lykke Li
+94	http://dl.soundowl.com/5x1r.mp3	Color On The Walls	1	4	Foster The People
+96	http://dl.soundowl.com/5x1u.mp3	Fake Tales Of San Francisco	1	4	Arctic Monkeys
+\.
+
+
+--
+-- Name: seqmidia; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('seqmidia', 117, true);
+
+
+--
+-- Name: genero_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY genero
+    ADD CONSTRAINT genero_pkey PRIMARY KEY (cd_genero);
+
+
+--
+-- Name: musica_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY midia
+    ADD CONSTRAINT musica_pkey PRIMARY KEY (cd_midia);
+
+
+--
+-- Name: pkArtista; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY artista
+    ADD CONSTRAINT "pkArtista" PRIMARY KEY (cd_artista);
+
+
+--
+-- Name: fkmidia001; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY midia
+    ADD CONSTRAINT fkmidia001 FOREIGN KEY (cd_genero) REFERENCES genero(cd_genero);
+
+
+--
+-- Name: public; Type: ACL; Schema: -; Owner: postgres
+--
+
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+REVOKE ALL ON SCHEMA public FROM postgres;
+GRANT ALL ON SCHEMA public TO postgres;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+--
+-- PostgreSQL database dump complete
+--
+

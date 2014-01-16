@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition template="template.xhtml">
+
+	<script src="js/jquery-2.0.3.js"></script>
+
+
+
+	<ui:define name="conteudo">
+		<script>
+			function reproduzir(musica) {
+				$("#video").attr("src", musica);
+				$("#video").attr("poster", "./images/capa.jpg");
+			}
+			
+			function playPause()
+			{ 
+				var video = document.getElementById("video"); 
+				if (video.paused) 
+			  		video.play(); 
+				else 
+			  		video.pause(); 
+			}
+			
+		</script> 
+
+		<h:form id="form">
+		
+			<p:growl id="growlMsgLoad" showDetail="true"/>
+			<p:separator id="customSeparator1"/>
+			<p:menubar id="submenuBar">
+				<p:menuitem value="All" update="musicTable" actionListener="#{musicaMB.listarMusicas}" icon="ui-icon-play">
+					<f:param name="cdGenero" value="0" />
+				</p:menuitem>
+				<p:menuitem value="Alternative" update="musicTable" actionListener="#{musicaMB.listarMusicas}" icon="ui-icon-play">
+					<f:param name="cdGenero" value="2" />
+				</p:menuitem>
+				<p:menuitem value="Deep House" update="musicTable" actionListener="#{musicaMB.listarMusicas}" icon="ui-icon-play">
+					<f:param name="cdGenero" value="1" />
+				</p:menuitem>
+				<p:menuitem value="Indie Rock" update="musicTable" actionListener="#{musicaMB.listarMusicas}" icon="ui-icon-play">
+					<f:param name="cdGenero" value="4" />
+				</p:menuitem>
+				<p:menuitem value="Pop" update="musicTable" actionListener="#{musicaMB.listarMusicas}" icon="ui-icon-play">
+					<f:param name="cdGenero" value="6" />
+				</p:menuitem>
+				<p:menuitem value="Punk Rock" update="musicTable" actionListener="#{musicaMB.listarMusicas}" icon="ui-icon-play">
+					<f:param name="cdGenero" value="5" />
+				</p:menuitem>
+				<p:menuitem value="National Rock" update="musicTable" actionListener="#{musicaMB.listarMusicas}" icon="ui-icon-play">
+					<f:param name="cdGenero" value="3" />
+				</p:menuitem>
+			</p:menubar>
+			
+			<p:separator id="customSeparator2"/>
+			
+			<p:fieldset legend="Music Player" id="musicPlayerPanel">
+				
+				<h:panelGrid id="playerGrid" columns="5">
+					<p:commandButton value="Prev" icon="ui-icon-seek-start"	actionListener="#{musicaMB.prevTrack}" update="musicTable growlMsgLoad" />
+					<video id="video" controls="" src="" autoplay="true" poster="" width="300" height="150"	onended="document.getElementById('form:buttonNextTrack').click();" />
+					<p:commandButton id="buttonNextTrack" value="Next" icon="ui-icon-seek-end" actionListener="#{musicaMB.nextTrack}" update="musicTable growlMsgLoad" />
+				</h:panelGrid>
+			
+				<p:separator id="customSeparator" style="height:3px" />
+				
+				<p:dataTable id="musicTable" var="musica"
+					value="#{musicaMB.musicasList}" rowKey="#{musica.cdMidia}"
+					paginator="false" rows="100" selection="#{musicaMB.selectedMidia}"
+					selectionMode="single" filteredValue="#{musicaMB.musicasFiltradas}"
+					emptyMessage="Não foram encontradas músicas">
+	
+					<p:ajax event="rowSelect" listener="#{musicaMB.play}" update=":form:growlMsgLoad" />
+	
+					<p:column style="width: 2%" >
+						<p:commandButton title="Play" action="#{musicaMB.playByButton}"	update="musicTable :form:growlMsgLoad" icon="ui-icon-play"
+							style="width: 30px; height: 30px;">
+							<f:setPropertyActionListener value="#{musica}" target="#{musicaMB.selectedMidia}" />
+						</p:commandButton>
+					</p:column>
+	
+					<p:column headerText="Artist" style="width:30%" >
+						<h:outputText value="#{musica.nmArtista}" />
+					</p:column>
+	
+					<p:column headerText="Title" style="width:50%" >
+						<h:outputText value="#{musica.nmMusica}" />
+					</p:column>
+	
+				</p:dataTable>
+			</p:fieldset>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>
